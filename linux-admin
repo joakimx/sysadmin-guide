@@ -1,8 +1,9 @@
 1) Set up a KVM hypervisor.
     X   Done with qemu, virtual machine manager
+            Host machine CentOS 7
 
 2) Inside of that KVM hypervisor, install a Spacewalk server. Use CentOS 6 as the distro for all work below. (For bonus points, set up errata importation on the CentOS channels, so you can properly see security update advisory information.)
-    -   http://idroot.net/tutorials/how-to-install-spacewalk-on-centos-7/
+    X   http://idroot.net/tutorials/how-to-install-spacewalk-on-centos-7/
     X   Done
 
 3) Create a VM to provide named and dhcpd service to your entire environment. Set up the dhcp daemon to use the Spacewalk server as the pxeboot machine (thus allowing you to use Cobbler to do unattended OS installs). Make sure that every forward zone you create has a reverse zone associated with it. Use something like "internal.virtnet" (but not ".local") as your internal DNS zone.
