@@ -7,13 +7,20 @@
 
 3) Create a VM to provide named and dhcpd service to your entire environment. Set up the dhcp daemon to use the Spacewalk server as the pxeboot machine (thus allowing you to use Cobbler to do unattended OS installs). Make sure that every forward zone you create has a reverse zone associated with it. Use something like "internal.virtnet" (but not ".local") as your internal DNS zone.
     X   DHCP server created and enabled
-    -   TODO:  
-        X   configure DNS (Configured/installed, but not working)
-                https://www.unixmen.com/setting-dns-server-centos-7/
-        -   nmtui was resetting /etc/resolv.conf, had to edit the connection to add my DNS server IP for DNS(After adding my DNS server, could not ping any URL, in or out of the network)
-        -   DHCP Daemon should use Spacewalk as PXEBoot machine (Unsure how to do this with VMs yet)
-        x   Create forward and reverse zones
-                Zones created for the spacewalk server but not working properly, can only access via IP
+    -   TODO: 
+        -   DNS: 
+            X   configure DNS (Configured/installed, but not working)
+                    https://www.unixmen.com/setting-dns-server-centos-7/
+            -   nmtui was resetting /etc/resolv.conf, had to edit the connection to add my DNS server IP for-
+                DNS(After adding my DNS server, could not ping any URL, in or out of the network)
+                (Don't use nmtui?)
+        -   DHCP:
+            -   DHCP Daemon should use Spacewalk as PXEBoot machine (Unsure how to do this with VMs yet)
+            -   Create forward and reverse zones
+                    Zones created for the spacewalk server but not working properly, can only access via IP
+            -   DHCP Server should be outside the range of IPs it hands out, ex: 192.168.122.101 if range is 1 - 100.
+            -   In BIND add a forwarders {} section to /etc/bind/named.conf.options containing a public DNS server for non-local.
+            -   DHCP should give out router IP as Gateway Address and DNS server IP as DNS address.
 
 4) Use that Spacewalk server to automatically (without touching it) install a new pair of OS instances, with which you will then create a Master/Master pair of LDAP servers. Make sure they register with the Spacewalk server. Do not allow anonymous bind, do not use unencrypted LDAP.
 
