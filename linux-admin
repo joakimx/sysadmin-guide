@@ -1,17 +1,19 @@
 1) Set up a KVM hypervisor.
-    -   Done with qemu, virtual machine manager
+    X   Done with qemu, virtual machine manager
 
 2) Inside of that KVM hypervisor, install a Spacewalk server. Use CentOS 6 as the distro for all work below. (For bonus points, set up errata importation on the CentOS channels, so you can properly see security update advisory information.)
     -   http://idroot.net/tutorials/how-to-install-spacewalk-on-centos-7/
+    X   Done
 
 3) Create a VM to provide named and dhcpd service to your entire environment. Set up the dhcp daemon to use the Spacewalk server as the pxeboot machine (thus allowing you to use Cobbler to do unattended OS installs). Make sure that every forward zone you create has a reverse zone associated with it. Use something like "internal.virtnet" (but not ".local") as your internal DNS zone.
-    -   DHCP server created and enabled
+    X   DHCP server created and enabled
     -   TODO:  
-        -   configure DNS
+        X   configure DNS (Configured/installed, but not working)
                 https://www.unixmen.com/setting-dns-server-centos-7/
-        -   nmtui was resetting /etc/resolv.conf, had to edit the connection to add my DNS server IP for DNS
-        -   DHCP Daemon should use Spacewalk as PXEBoot machine
-        -   Create forward and reverse zones
+        -   nmtui was resetting /etc/resolv.conf, had to edit the connection to add my DNS server IP for DNS(After adding my DNS server, could not ping any URL, in or out of the network)
+        -   DHCP Daemon should use Spacewalk as PXEBoot machine (Unsure how to do this with VMs yet)
+        x   Create forward and reverse zones
+                Zones created for the spacewalk server but not working properly, can only access via IP
 
 4) Use that Spacewalk server to automatically (without touching it) install a new pair of OS instances, with which you will then create a Master/Master pair of LDAP servers. Make sure they register with the Spacewalk server. Do not allow anonymous bind, do not use unencrypted LDAP.
 
